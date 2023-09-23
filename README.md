@@ -1,83 +1,64 @@
-# Add Newline Script
+# New Line Checker
 
-This script ensures that files end with a newline character. It recursively checks all files in a directory, and if a file does not end with a newline, it adds one. This is especially useful for developers, as many coding standards and tools prefer or require files to end with a newline.
+**Version**: v0.5.0beta  
+**Author**: Michael McEwen
+
+## Description
+
+New Line Checker is a handy script designed to verify if your files end with a newline, ensuring adherence to a common coding standard. It can automatically add newlines to those that don't have them, and remove any trailing whitespace or empty lines at the end of files. The script will log its actions, providing an efficient way to track which files were modified.
 
 ## Features
 
-- Supports various file extensions by default.
-- Prompts user for unrecognized file extensions.
-- Skips hidden files and directories.
-- Recursive: Processes files in the specified directory and its subdirectories.
-- Provides visual feedback during processing.
+- Supports various file extensions like `.c`, `.cpp`, `.js`, `.py`, `.java`, and many more.
 
-## Table of Contents
+- Ability to ask the user for guidance on unlisted file extensions or files with no extensions.
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
+- Skips processing hidden files and directories (e.g., `.git`).
+
+- Excludes processing the `node_modules` directory.
+
+- Creates a detailed log with a timestamp at `~/newline_whitespace_log.txt`.
 
 ## Installation
 
-### Step-by-step Instructions
+### Prerequisites
 
-1. **Clone the Repository**  
-   Use the following command to clone the repository:
+Ensure you have `Python 3` installed on your machine.
 
-   ```bash
-   git clone https://github.com/mcewball13/empty-nl
-   ```
+### Steps
 
-   Alternatively, download and extract the ZIP file from the GitHub repository.
+1. Clone the repository or download the script `newline_checker.py`.
 
-2. **Navigate to the Directory**
+    ```bash
+    git clone [REPOSITORY_URL]
+    ```
 
-   ```bash
-   cd <path-to-your-directory>/empty-nl
-   ```
+2. Navigate to the directory containing the script.
 
-3. **Make the Script Executable**  
-
-   ```bash
-   chmod +x add_newline.sh
-   ```
-
-4. **(Optional) Add to System Path**  
-
-   a. Move the script to a directory in your PATH, like `/usr/local/bin/`:
-
-   ```bash
-   mv add_newline.sh /usr/local/bin/
-   ```
-
-   OR
-
-   b. Add the script's directory to your PATH:
-
-   ```bash
-   echo 'export PATH="$PATH:/path-to-your-directory/your-repo-name"' >> ~/.bashrc
-   source ~/.bashrc
-   ```
-
-   (replace `.bashrc` with whatever file your shell uses for configuration)
-
-5. **Complete!**  
-   The script is now ready for use.
+3. You're ready to go!
 
 ## Usage
 
-To use the script, navigate to the terminal and type:
+To check a specific directory and process its files, navigate to the directory containing the `newline_checker.py` script and run:
 
 ```bash
-add_newline.sh <directory>
+python3 newline_checker.py [DIRECTORY_PATH]
 ```
 
-Replace `<directory>` with the path to the directory you want to process.
+Replace `[DIRECTORY_PATH]` with the path to the directory you wish to check.
 
-## Contributing
+For example, to check the current directory:
 
-Feel free to fork the repository and submit pull requests for any improvements or features you'd like to add. Please ensure that your code is clean and well-commented.
+```bash
+python3 newline_checker.py .
+```
+
+## Supported Platforms
+
+- Windows
+- macOS
+- Linux
 
 ## License
 
-This script is released under the MIT License. See the `LICENSE` file for more details.
+This project is licensed under the MIT License. See the `LICENSE` file in the repository for the full license text.
