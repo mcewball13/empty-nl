@@ -1,5 +1,5 @@
 #!/bin/bash
-# v1.1
+# v1.2
 # Author: Michael McEwen
 
 # Define the directory to start from
@@ -57,6 +57,6 @@ while read -r file <&3; do
         echo "Skipping $file - already has a newline at the end."
     fi
 
-done 3< <(find "$DIR" -type f ! -path '*/\.*')
+done 3< <(find "$DIR" -type d -name 'node_modules' -prune -o -type f ! -path '*/\.*' -print)
 
 echo "Done processing files!"
