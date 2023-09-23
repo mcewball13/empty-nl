@@ -1,6 +1,6 @@
 # New Line Checker
 
-**Version**: v0.5.0beta  
+**Version**: v0.5.1beta  
 **Author**: Michael McEwen
 
 ## Description
