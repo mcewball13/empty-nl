@@ -1,6 +1,6 @@
 # New Line Checker
 # Author: Michael McEwen
-# v0.4.0
+# v0.5.1beta
 
 import os
 import sys
@@ -43,7 +43,7 @@ def main(directory):
     NEWLINES_ADDED = 0  # Counter for newlines added
     WHITESPACE_REMOVED = 0  # Counter for whitespaces removed
 
-    extensions = ["c", "cpp", "js", "py", "java", "ts", "jsx", "tsx", "html", "md", "json", "sql", "sh"]
+    extensions = ["c", "cpp", "js", "py", "java", "ts", "jsx", "tsx", "html", "css", "handlebars", "md", "json", "sql", "sh"]
     user_choices = {}
 
     for root, dirs, files in os.walk(directory):
