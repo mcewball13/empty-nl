@@ -1,9 +1,10 @@
 #!/bin/bash
-# v1.2
+# v1.2.1
 # Author: Michael McEwen
 
 # Define the directory to start from
 DIR="$1"
+NEWLINES_ADDED=0  # Counter for newlines added
 
 if [ -z "$DIR" ]; then
     echo "Usage: $0 <directory>"
@@ -51,8 +52,9 @@ while read -r file <&3; do
     echo "Obtained value for last byte: $last_byte"
     echo "Last byte of $file is: $last_byte"
     if [ "$last_byte" != "0a" ]; then
-        echo "Adding newline to $file."
+        echo -e "\033[32mAdding newline to $file.\033[0m"  # Green text for added newline
         echo "" >> "$file"
+        NEWLINES_ADDED=$((NEWLINES_ADDED+1))  # Increment the counter
     else
         echo "Skipping $file - already has a newline at the end."
     fi
@@ -60,3 +62,4 @@ while read -r file <&3; do
 done 3< <(find "$DIR" -type d -name 'node_modules' -prune -o -type f ! -path '*/\.*' -print)
 
 echo "Done processing files!"
+echo "$NEWLINES_ADDED newlines were added."
