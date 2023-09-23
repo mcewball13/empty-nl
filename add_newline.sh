@@ -1,5 +1,5 @@
 #!/bin/bash
-# v1.0
+# v1.1
 # Author: Michael McEwen
 
 # Define the directory to start from
@@ -12,6 +12,8 @@ fi
 
 # Extensions to be processed by default
 extensions=" c cpp js py java ts jsx tsx html md json sql sh "
+
+declare -A user_choices
 
 # Process files recursively, skipping hidden files and directories
 while read -r file <&3; do
@@ -28,9 +30,13 @@ while read -r file <&3; do
 
     # If it's an unrecognized extension, ask the user
     if [[ ! $extensions =~ " $ext " ]]; then
-        echo -e "\033[33mUnrecognized extension .$ext. Do you want to process this kind of file? (y/n) \033[0m\c"
-        read -r answer
-
+        if [[ -z ${user_choices[$ext]} ]]; then
+            echo -e "\033[33mUnrecognized extension .$ext. Do you want to process this kind of file? (y/n) \033[0m\c"
+            read -r answer
+            user_choices[$ext]=$answer
+        else
+            answer=${user_choices[$ext]}
+        fi
 
         if [[ ! $answer =~ ^[Yy]$ ]]; then
             # Just continue the loop, skipping this file
