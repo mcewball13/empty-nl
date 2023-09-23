@@ -1,5 +1,5 @@
 #!/bin/bash
-# v0.6
+# v1.0
 # Author: Michael McEwen
 
 # Define the directory to start from
@@ -11,34 +11,32 @@ if [ -z "$DIR" ]; then
 fi
 
 # Extensions to be processed by default
-extensions=" c cpp js py java ts jsx tsx html md json sql sh NO_EXTENSION "
+extensions=" c cpp js py java ts jsx tsx html md json sql sh "
 
 # Process files recursively, skipping hidden files and directories
-find "$DIR" -type f ! -path '*/\.*' | while read -r file; do
+while read -r file <&3; do
     echo "Checking: $file"
     
     basefile=$(basename "$file")
-if [[ "$basefile" == *.* ]]; then
-    ext="${file##*.}"  # Extract the file extension
-    echo "File has an extension: .$ext"
-else
-    echo "File has no extension."
-    ext="NO_EXTENSION"
-fi
+    if [[ "$basefile" == *.* ]]; then
+        ext="${file##*.}"  # Extract the file extension
+        echo "File has an extension: .$ext"
+    else
+        echo "File has no extension."
+        ext="NO_EXTENSION"
+    fi
+
+    # If it's an unrecognized extension, ask the user
+    if [[ ! $extensions =~ " $ext " ]]; then
+        echo -e "\033[33mUnrecognized extension .$ext. Do you want to process this kind of file? (y/n) \033[0m\c"
+        read -r answer
 
 
-    # If it's an unrecognized extension and not a ".sh" file, ask the user
-    if [[ ! $extensions =~ " $ext " ]] && [[ $ext != "sh" ]]; then
-        read -p "Unrecognized extension .$ext. Do you want to process this kind of file? (y/n) " answer
-        case $answer in
-            [Yy]* ) 
-                ;;
-            * )
-                # Just continue the loop, skipping this file
-                echo "Skipping file due to unrecognized extension: $file"
-                continue
-                ;;
-        esac
+        if [[ ! $answer =~ ^[Yy]$ ]]; then
+            # Just continue the loop, skipping this file
+            echo "Skipping file due to unrecognized extension: $file"
+            continue
+        fi
     fi
 
     # Check if the file ends with a newline
@@ -52,6 +50,7 @@ fi
     else
         echo "Skipping $file - already has a newline at the end."
     fi
-done
+
+done 3< <(find "$DIR" -type f ! -path '*/\.*')
 
 echo "Done processing files!"
