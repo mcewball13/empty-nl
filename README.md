@@ -1,6 +1,6 @@
 # New Line Checker
 
-**Version**: v0.5.1beta  
+**Version**: v0.5.2beta  
 **Author**: Michael McEwen
 
 ## Description
@@ -29,9 +29,9 @@ Ensure you have `Python 3` installed on your machine.
 
 1. Clone the repository or download the script `newline_checker.py`.
 
-    ```bash
-    git clone [REPOSITORY_URL]
-    ```
+   ```bash
+   git clone https://github.com/mcewball13/empty-nl
+   ```
 
 2. Navigate to the directory containing the script.
 

@@ -1,6 +1,6 @@
 # New Line Checker
 # Author: Michael McEwen
-# v0.5.1beta
+# v0.5.2beta
 
 import os
 import sys
